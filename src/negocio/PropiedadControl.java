@@ -16,20 +16,28 @@ public class PropiedadControl {
         obj=new Propiedad();
     }
     
-     public DefaultTableModel listar(String texto){
-        List<Propiedad> lista=new ArrayList();
+       public DefaultTableModel listar(String texto) {
+        
+        List<Propiedad> lista = new ArrayList();
         lista.addAll(DATOS.listar(texto));
-        String[] titulos = {"ID", "Nombre", "Direccion", "Caracteristicas", 
-        "Estado", "Precio de Alquiler"};
+        //Establecemos la columna del tableModel
+        //Propiedad(int id, String nombre, String direccion, String caracteristicas, String estado, double precioAlquiler, String createdAt, String updatedAt)
+        String[] titulos = {"ID", "NOMBRE","DIRECCION","CARACTERISTICAS","ESTADO","PRECIO ALQUILER"};
+        //Declaramos un vector que será el que agreguemos 
+        //como registro al DefaultTableModel
         String[] registro = new String[6];
+        //agrego los títulos al DefaultTableModel
         this.modeloTabla = new DefaultTableModel(null, titulos);
-        for (Propiedad item: lista){
-            registro[0]=Integer.toString(item.getId());
-            registro[1]=item.getNombre();
-            registro[2]=item.getDireccion();
-            registro[3]=item.getCaracteristicas();
-            registro[4]=item.getEstado();
-            registro[5]=Double.toString((double) item.getPrecioAlquiler());
+        //Recorrer toda mi lista y la pasare al DefaultTableModel
+        for (Propiedad item : lista) {
+            registro[0] = Integer.toString(item.getId());
+            registro[1] = item.getNombre();
+            registro[2] = item.getDireccion();
+            registro[3] = item.getCaracteristicas();
+            registro[4] = item.getEstado();
+            registro[5] =  String.valueOf(item.getPrecioAlquiler());
+
+
             this.modeloTabla.addRow(registro);
         }
         return this.modeloTabla;
